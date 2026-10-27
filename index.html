@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jurisdicta — AI Practice Intelligence for Lawyers</title>
+<meta name="description" content="Jurisdicta is an AI-powered case management platform for lawyers: case and client management, AI document drafting, contract analysis, and a cited legal research chatbot. Starting in Bangladesh.">
+<meta name="theme-color" content="#5C1A2B">
+<meta property="og:title" content="Jurisdicta — AI Practice Intelligence for Lawyers">
+<meta property="og:description" content="Case management, AI drafting, contract analysis and cited Q&A over your own case files. Built for Bangladesh first.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' rx='92' fill='%235C1A2B'/%3E%3Cg transform='translate(78,78) scale(0.485)'%3E%3Cpath fill='%23C9A24B' d='M504.971 199.362l-22.627-22.627c-9.373-9.373-24.569-9.373-33.941 0l-5.657 5.657L329.608 69.255l5.657-5.657c9.373-9.373 9.373-24.569 0-33.941L312.638 7.029c-9.373-9.373-24.569-9.373-33.941 0L154.246 131.48c-9.373 9.373-9.373 24.569 0 33.941l22.627 22.627c9.373 9.373 24.569 9.373 33.941 0l5.657-5.657 39.598 39.598-81.04 81.04-5.657-5.657c-12.497-12.497-32.758-12.497-45.255 0L9.373 412.118c-12.497 12.497-12.497 32.758 0 45.255l45.255 45.255c12.497 12.497 32.758 12.497 45.255 0l114.745-114.745c12.497-12.497 12.497-32.758 0-45.255l-5.657-5.657 81.04-81.04 39.598 39.598-5.657 5.657c-9.373 9.373-9.373 24.569 0 33.941l22.627 22.627c9.373 9.373 24.569 9.373 33.941 0l124.451-124.451c9.372-9.372 9.372-24.568 0-33.941z'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --oxblood:#5C1A2B; --oxblood-dark:#34101A; --oxblood-mid:#4A1522;
+  --gold:#C9A24B; --gold-deep:#9A7A2E; --gold-soft:#EDE7D8;
+  --cream:#FAF7F1; --paper:#FFFFFF; --ink:#2A1A1D; --muted:#6E5852; --line:#E7E2D3;
+  --serif:'Playfair Display',Cambria,Georgia,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --radius:14px; --max:1140px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--serif);line-height:1.15;letter-spacing:-.01em}
+.eyebrow{font-size:12.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep)}
+.on-dark .eyebrow{color:var(--gold)}
+section{padding:96px 0}
+.section-head{max-width:680px;margin-bottom:48px}
+.section-head h2{font-size:clamp(28px,4vw,40px);color:var(--oxblood);margin:12px 0 14px}
+.section-head p{color:var(--muted);font-size:17px}
+.on-dark .section-head h2{color:#fff}
+.on-dark .section-head p{color:#E3CFC6}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:999px;font-weight:600;font-size:15px;border:1.5px solid transparent;cursor:pointer;transition:transform .15s,background .2s,color .2s,border-color .2s;font-family:var(--sans)}
+.btn:hover{transform:translateY(-1px)}
+.btn-gold{background:var(--gold);color:var(--oxblood-dark)}
+.btn-gold:hover{background:#d8b45e}
+.btn-ghost{border-color:rgba(255,255,255,.35);color:#fff}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-dark{background:var(--oxblood);color:#fff}
+.btn-dark:hover{background:var(--oxblood-mid)}
+
+/* nav */
+header.nav{position:sticky;top:0;z-index:50;background:rgba(52,16,26,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(201,162,75,.18)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:12px;color:#fff;font-family:var(--serif);font-weight:700;font-size:20px;letter-spacing:.08em}
+.brand .mark{width:36px;height:36px}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{color:#E3CFC6;font-size:14.5px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-links .btn{padding:9px 20px;font-size:14px;color:var(--oxblood-dark)}
+.nav-links .btn:hover{color:var(--oxblood-dark)}
+.menu-btn{display:none;background:none;border:0;color:#fff;cursor:pointer;padding:8px}
+.menu-btn svg{width:26px;height:26px}
+
+/* hero */
+.hero{background:radial-gradient(1200px 600px at 85% -10%,#6d2236 0%,transparent 60%),var(--oxblood-dark);color:#fff;padding:88px 0 96px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(36px,5.4vw,60px);margin:16px 0 20px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p.lead{font-size:18px;color:#E3CFC6;max-width:540px;margin-bottom:32px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:34px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:10px}
+.tag{font-size:12.5px;padding:6px 14px;border:1px solid rgba(201,162,75,.4);border-radius:999px;color:#ECD9D1}
+
+/* product mock */
+.mock{background:var(--paper);color:var(--ink);border-radius:18px;box-shadow:0 30px 70px rgba(0,0,0,.45);overflow:hidden;border:1px solid rgba(201,162,75,.35)}
+.mock-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;background:var(--oxblood);color:#fff;font-size:13px}
+.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.35)}
+.mock-bar b{margin-left:8px;font-weight:600}
+.mock-body{padding:18px}
+.mock-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.mock-tabs span{font-size:12px;padding:5px 12px;border-radius:999px;background:var(--gold-soft);color:var(--muted)}
+.mock-tabs span.on{background:var(--oxblood);color:#fff}
+.mock-row{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-size:13px;margin-bottom:8px}
+.mock-row small{color:var(--muted)}
+.pill{font-size:11px;padding:3px 10px;border-radius:999px;background:var(--gold-soft);color:var(--gold-deep);font-weight:600}
+.chat{margin-top:14px;background:var(--cream);border-radius:12px;padding:14px;font-size:13px}
+.chat .q{background:var(--oxblood);color:#fff;border-radius:12px 12px 2px 12px;padding:9px 12px;margin-left:auto;max-width:86%;width:fit-content;margin-bottom:10px}
+.chat .a{background:#fff;border:1px solid var(--line);border-radius:12px 12px 12px 2px;padding:10px 12px;max-width:94%}
+.cite{display:inline-block;margin-top:8px;font-size:11px;padding:3px 9px;border-radius:6px;background:var(--gold-soft);color:var(--gold-deep);font-weight:600}
+.mock-note{text-align:center;font-size:11.5px;color:#C9AFA3;margin-top:12px}
+
+/* problem strip */
+.strip{background:var(--gold-soft);padding:36px 0;border-block:1px solid var(--line)}
+.strip p{font-family:var(--serif);font-size:clamp(20px,2.6vw,28px);color:var(--oxblood);text-align:center;max-width:900px;margin:0 auto;line-height:1.4}
+
+/* cards */
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(92,26,43,.1)}
+.ico{width:48px;height:48px;border-radius:50%;background:var(--oxblood);display:grid;place-items:center;margin-bottom:18px}
+.ico svg{width:22px;height:22px;fill:none;stroke:var(--gold);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-size:20px;color:var(--oxblood);margin-bottom:10px}
+.card p{color:var(--muted);font-size:15px}
+.card ul{list-style:none;margin-top:14px;font-size:14px;color:var(--muted)}
+.card li{padding-left:18px;position:relative;margin-bottom:6px}
+.card li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;counter-reset:s}
+.step{background:var(--oxblood-mid);border:1px solid rgba(201,162,75,.2);border-radius:var(--radius);padding:24px 18px;text-align:center}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:34px;height:34px;margin:0 auto 14px;border:1.5px solid var(--gold);border-radius:50%;color:var(--gold);font-weight:600;font-size:14px}
+.step h3{font-family:var(--sans);font-size:16px;color:#fff;margin-bottom:8px}
+.step p{font-size:13.5px;color:#D9C2BA}
+.dark{background:var(--oxblood-dark);color:#fff}
+
+/* roadmap */
+.phase{position:relative}
+.phase .when{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin-bottom:8px}
+.phase.first{background:var(--oxblood);border-color:var(--oxblood)}
+.phase.first h3{color:#fff}.phase.first p,.phase.first li{color:#E8D5CC}.phase.first .when{color:var(--gold)}
+
+/* principles */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.checks{list-style:none}
+.checks li{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.checks li:last-child{border:0}
+.checks .tick{flex:none;width:26px;height:26px;border-radius:50%;background:var(--oxblood);color:var(--gold);display:grid;place-items:center;font-size:13px;font-weight:700;margin-top:2px}
+.checks b{display:block;color:var(--oxblood);font-size:16px}
+.checks span{color:var(--muted);font-size:14.5px}
+
+/* faq */
+details{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:0 22px;margin-bottom:12px}
+summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:600;color:var(--oxblood);display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--gold-deep);font-size:22px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);padding-bottom:18px;font-size:15px}
+.faq{max-width:780px}
+
+/* contact */
+.contact-box{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:start}
+.contact-box h2{font-size:clamp(28px,4vw,40px);color:#fff;margin:12px 0 16px}
+.contact-box p{color:#E3CFC6}
+.contact-box ul{list-style:none;margin-top:22px}
+.contact-box li{padding:7px 0 7px 26px;position:relative;color:#ECD9D1;font-size:15px}
+.contact-box li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:700}
+form{background:var(--paper);color:var(--ink);padding:30px;border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+label{display:block;font-size:13px;font-weight:600;color:var(--oxblood);margin:0 0 6px}
+input,select,textarea{width:100%;font:inherit;font-size:15px;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--cream);color:var(--ink);margin-bottom:16px;transition:border-color .2s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
+textarea{min-height:96px;resize:vertical}
+form .btn{width:100%;justify-content:center}
+.form-msg{margin-top:14px;font-size:14px;text-align:center;min-height:20px}
+.form-msg.ok{color:#2f6b3a}.form-msg.err{color:#9b2c2c}
+
+/* footer */
+footer{background:#220A11;color:#B5A39C;padding:48px 0 32px;font-size:14px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.foot .brand{font-size:18px}
+.foot-links{display:flex;gap:24px;flex-wrap:wrap}
+.foot-links a:hover{color:var(--gold)}
+.legal{margin-top:28px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);font-size:12.5px;color:#8f7d76}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.btn,.card{transition:none}}
+
+/* responsive */
+@media (max-width:960px){
+  .hero-grid,.split,.contact-box{grid-template-columns:1fr}
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  section{padding:72px 0}
+}
+@media (max-width:760px){
+  .menu-btn{display:block}
+  .nav-links{position:absolute;top:68px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--oxblood-dark);padding:8px 24px 20px;border-bottom:1px solid rgba(201,162,75,.18);display:none}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+  .nav-links .btn{margin-top:14px;justify-content:center;border:0}
+}
+@media (max-width:540px){
+  .grid-4,.steps{grid-template-columns:1fr}
+  .hero{padding:64px 0 72px}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="brand" aria-label="Jurisdicta home">
+      <svg class="mark" viewBox="0 0 400 400" aria-hidden="true"><rect width="400" height="400" rx="92" fill="#5C1A2B"/><g transform="translate(78,78) scale(0.485)"><path fill="#C9A24B" d="M504.971 199.362l-22.627-22.627c-9.373-9.373-24.569-9.373-33.941 0l-5.657 5.657L329.608 69.255l5.657-5.657c9.373-9.373 9.373-24.569 0-33.941L312.638 7.029c-9.373-9.373-24.569-9.373-33.941 0L154.246 131.48c-9.373 9.373-9.373 24.569 0 33.941l22.627 22.627c9.373 9.373 24.569 9.373 33.941 0l5.657-5.657 39.598 39.598-81.04 81.04-5.657-5.657c-12.497-12.497-32.758-12.497-45.255 0L9.373 412.118c-12.497 12.497-12.497 32.758 0 45.255l45.255 45.255c12.497 12.497 32.758 12.497 45.255 0l114.745-114.745c12.497-12.497 12.497-32.758 0-45.255l-5.657-5.657 81.04-81.04 39.598 39.598-5.657 5.657c-9.373 9.373-9.373 24.569 0 33.941l22.627 22.627c9.373 9.373 24.569 9.373 33.941 0l124.451-124.451c9.372-9.372 9.372-24.568 0-33.941z"/></g></svg>
+      JURISDICTA
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#product">Product</a>
+      <a href="#how">How it works</a>
+      <a href="#trust">Trust</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#faq">FAQ</a>
+      <a href="#access" class="btn btn-gold">Request early access</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero on-dark">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">AI practice intelligence for lawyers</span>
+      <h1>One system for your cases, your documents, and <em>everything you’ve ever filed.</em></h1>
+      <p class="lead">Jurisdicta is an AI-powered case management platform for advocates and law firms. Manage clients and matters, draft documents in minutes, analyse contracts, and ask questions across your own files, with answers that cite their source.</p>
+      <div class="hero-cta">
+        <a href="#access" class="btn btn-gold">Request early access</a>
+        <a href="#product" class="btn btn-ghost">See what it does</a>
+      </div>
+      <div class="hero-tags">
+        <span class="tag">Case management</span><span class="tag">AI drafting</span><span class="tag">Contract analysis</span><span class="tag">Cited legal Q&amp;A</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="mock" aria-label="Illustrative preview of the Jurisdicta matter workspace">
+        <div class="mock-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><b>Matter workspace</b></div>
+        <div class="mock-body">
+          <div class="mock-tabs"><span class="on">Documents</span><span>Deadlines</span><span>Draft</span><span>Ask</span></div>
+          <div class="mock-row"><div>Sale deed (registered)<br><small>Uploaded · 14 pages</small></div><span class="pill">Analysed</span></div>
+          <div class="mock-row"><div>Legal notice, draft 2<br><small>Generated · 2 fields to confirm</small></div><span class="pill">Draft</span></div>
+          <div class="mock-row"><div>Next hearing<br><small>Reminder set</small></div><span class="pill">Due soon</span></div>
+          <div class="chat">
+            <div class="q">Does this deed transfer full ownership?</div>
+            <div class="a">The deed describes an absolute transfer of the property, with no reversion or condition on the seller’s side.<br><span class="cite">Sale deed · p. 4</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="mock-note">Illustrative interface preview</p>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap reveal"><p>Lawyers shouldn’t spend their best hours retyping deeds, hunting through folders, and reading contracts line by line.</p></div>
+</div>
+
+<!-- PRODUCT -->
+<section id="product">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">The platform</span>
+      <h2>Four tools, one connected workspace</h2>
+      <p>Everything shares the same matter files, so a document you upload once can be searched, analysed, and drafted from, with no copying between apps.</p>
+    </div>
+    <div class="grid-4">
+      <article class="card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+        <h3>Case &amp; client management</h3>
+        <p>A workspace for every matter: clients, documents, deadlines, and team tasks in one place.</p>
+        <ul><li>Matter workspaces</li><li>Client profiles</li><li>Deadlines &amp; reminders</li><li>Role-based team access</li></ul>
+      </article>
+      <article class="card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 14l2 2 4-4"/></svg></div>
+        <h3>AI document drafting</h3>
+        <p>First drafts of deeds, notices, agreements, and petitions, with missing details clearly flagged.</p>
+        <ul><li>Guided fact intake</li><li>Your own templates</li><li>Section checks</li><li>Editable output</li></ul>
+      </article>
+      <article class="card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M9 12h6M9 16h6M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg></div>
+        <h3>Contract analysis</h3>
+        <p>Upload an agreement and get the parties, dates, obligations, and risky terms pulled out for review.</p>
+        <ul><li>Clause extraction</li><li>Risk flags</li><li>Version comparison</li><li>Page-level evidence</li></ul>
+      </article>
+      <article class="card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></svg></div>
+        <h3>Cited legal chatbot</h3>
+        <p>Ask questions across your own case files and get answers that point to the exact document and page.</p>
+        <ul><li>Matter-level Q&amp;A</li><li>Firm-wide search</li><li>Source citations</li><li>Support checks</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section id="how" class="dark on-dark">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>From upload to a cited answer</h2>
+      <p>Every document becomes structured and searchable, and every result is checked against its source before you see it.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><h3>Ingest</h3><p>Upload deeds, agreements, notices, or scanned papers into a matter.</p></div>
+      <div class="step reveal"><h3>Process</h3><p>Text recognition, layout parsing, and classification structure each file.</p></div>
+      <div class="step reveal"><h3>Index</h3><p>Entities, clauses, and facts are extracted and tied to their page.</p></div>
+      <div class="step reveal"><h3>Route</h3><p>Your request goes to drafting, contract analysis, or Q&amp;A.</p></div>
+      <div class="step reveal"><h3>Verify</h3><p>A verification step checks support before returning a cited result.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section id="trust">
+  <div class="wrap split">
+    <div class="section-head reveal" style="margin-bottom:0">
+      <span class="eyebrow">Built for the profession</span>
+      <h2>AI that assists, and never replaces, your judgement</h2>
+      <p>Legal work carries confidentiality and accountability. Jurisdicta is designed around those realities from day one.</p>
+    </div>
+    <ul class="checks reveal">
+      <li><span class="tick">✓</span><div><b>Answers show their sources</b><span>Results link back to the document and page they came from, so you can verify before you rely on them.</span></div></li>
+      <li><span class="tick">✓</span><div><b>Lawyer stays in control</b><span>Drafts and analyses are starting points for review, not final legal advice.</span></div></li>
+      <li><span class="tick">✓</span><div><b>Client data stays separated</b><span>Designed around role-based access, per-firm data separation, and audit logging.</span></div></li>
+      <li><span class="tick">✓</span><div><b>Made for local practice</b><span>Starting with Bangladesh, shaped by how local advocates and chambers really work.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap" style="background:var(--gold-soft);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Where we’re going</span>
+      <h2>Bangladesh first, then the wider region</h2>
+      <p>We’re at the market-research stage, validating the problem with practising lawyers before we scale anything.</p>
+    </div>
+    <div class="grid-3">
+      <article class="card phase first reveal">
+        <div class="when">Phase 1 · Bangladesh</div>
+        <h3>Land with advocates &amp; chambers</h3>
+        <ul><li>Customer interviews and pilots</li><li>Core case management and drafting</li><li>Low-cost entry plan</li></ul>
+      </article>
+      <article class="card phase reveal">
+        <div class="when">Phase 2 · South Asia</div>
+        <h3>Deepen the product, expand the reach</h3>
+        <ul><li>Mature contract analysis and Q&amp;A</li><li>Multi-user firm collaboration</li><li>Neighbouring legal markets</li></ul>
+      </article>
+      <article class="card phase reveal">
+        <div class="when">Phase 3 · Global</div>
+        <h3>The AI layer for common-law practice</h3>
+        <ul><li>Jurisdiction packs for new markets</li><li>Integrations and firm analytics</li><li>Advanced drafting suite</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Questions</span>
+      <h2>Frequently asked</h2>
+    </div>
+    <div class="faq reveal">
+      <details><summary>Who is Jurisdicta for?</summary><p>Independent advocates, law chambers, mid-sized firms, and in-house legal teams, starting in Bangladesh.</p></details>
+      <details><summary>Is the product available today?</summary><p>Not publicly yet. We’re in the early research stage and talking to lawyers to shape what we build. Request early access and we’ll reach out as pilots open.</p></details>
+      <details><summary>Does Jurisdicta give legal advice?</summary><p>No. It’s a tool for lawyers. Drafts, analyses, and answers are meant to speed up your work and must be reviewed by you.</p></details>
+      <details><summary>How do I know an AI answer is right?</summary><p>Answers cite the document and page they came from, so you can check the source directly instead of taking the output on trust.</p></details>
+      <details><summary>Will it work with Bangla documents?</summary><p>Local-language support is a priority for our Bangladesh launch. We’re validating exactly which document types and languages lawyers need first, and your input helps decide that.</p></details>
+      <details><summary>Can I help shape the product?</summary><p>Yes, please. We’re looking for practising lawyers for short interviews and early pilots. Use the form below.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="access" class="dark on-dark">
+  <div class="wrap contact-box">
+    <div class="reveal">
+      <span class="eyebrow">Early access</span>
+      <h2>Help us build the practice platform lawyers actually want</h2>
+      <p>We’re talking to advocates and firms right now. Tell us a little about your practice and we’ll get in touch about a short interview or an early pilot.</p>
+      <ul>
+        <li>Short, no-pressure conversations</li>
+        <li>Early access as pilots open</li>
+        <li>A direct say in what we build first</li>
+      </ul>
+    </div>
+    <form id="accessForm" class="reveal" novalidate>
+      <label for="name">Full name</label>
+      <input id="name" name="name" type="text" autocomplete="name" required>
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" required>
+      <label for="role">I am a…</label>
+      <select id="role" name="role" required>
+        <option value="">Select one</option>
+        <option>Independent advocate</option>
+        <option>Chamber or law firm</option>
+        <option>In-house / corporate legal</option>
+        <option>Other</option>
+      </select>
+      <label for="message">What takes up most of your time? <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+      <textarea id="message" name="message"></textarea>
+      <button class="btn btn-dark" type="submit">Request early access</button>
+      <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a href="#top" class="brand">
+        <svg class="mark" viewBox="0 0 400 400" aria-hidden="true"><rect width="400" height="400" rx="92" fill="#5C1A2B"/><g transform="translate(78,78) scale(0.485)"><path fill="#C9A24B" d="M504.971 199.362l-22.627-22.627c-9.373-9.373-24.569-9.373-33.941 0l-5.657 5.657L329.608 69.255l5.657-5.657c9.373-9.373 9.373-24.569 0-33.941L312.638 7.029c-9.373-9.373-24.569-9.373-33.941 0L154.246 131.48c-9.373 9.373-9.373 24.569 0 33.941l22.627 22.627c9.373 9.373 24.569 9.373 33.941 0l5.657-5.657 39.598 39.598-81.04 81.04-5.657-5.657c-12.497-12.497-32.758-12.497-45.255 0L9.373 412.118c-12.497 12.497-12.497 32.758 0 45.255l45.255 45.255c12.497 12.497 32.758 12.497 45.255 0l114.745-114.745c12.497-12.497 12.497-32.758 0-45.255l-5.657-5.657 81.04-81.04 39.598 39.598-5.657 5.657c-9.373 9.373-9.373 24.569 0 33.941l22.627 22.627c9.373 9.373 24.569 9.373 33.941 0l124.451-124.451c9.372-9.372 9.372-24.568 0-33.941z"/></g></svg>
+        JURISDICTA
+      </a>
+      <div class="foot-links">
+        <a href="#product">Product</a><a href="#how">How it works</a><a href="#roadmap">Roadmap</a><a href="#faq">FAQ</a><a href="#access">Early access</a>
+      </div>
+    </div>
+    <p class="legal">© <span id="yr">2026</span> Jurisdicta. All rights reserved. Jurisdicta is a software tool for legal professionals and does not provide legal advice.</p>
+  </div>
+</footer>
+
+<script>
+/* ---------- CONFIG: connect your early-access form ----------
+   Option A (recommended): create a free form at https://formspree.io and paste its URL here,
+           e.g. "https://formspree.io/f/abcdwxyz"
+   Option B: set CONTACT_EMAIL and the form will open the visitor's email app instead.
+   Leave both empty and the form will show a "not open yet" message. */
+const FORM_ENDPOINT = "https://formspree.io/f/xkjjjekv";
+const CONTACT_EMAIL = "";
+
+// mobile menu
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+menuBtn.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', open);
+});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false');
+}));
+
+// reveal on scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// early-access form
+const form = document.getElementById('accessForm');
+const msg = document.getElementById('formMsg');
+function say(text, cls){ msg.textContent = text; msg.className = 'form-msg ' + (cls || ''); }
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(form).entries());
+  if (!data.name.trim() || !/^\S+@\S+\.\S+$/.test(data.email) || !data.role) {
+    say('Please add your name, a valid email, and your role.', 'err'); return;
+  }
+  if (FORM_ENDPOINT) {
+    try {
+      say('Sending…');
+      const r = await fetch(FORM_ENDPOINT, {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (!r.ok) throw new Error();
+      form.reset(); say('Thank you! We’ll be in touch soon.', 'ok');
+    } catch (_) { say('Something went wrong. Please try again in a moment.', 'err'); }
+  } else if (CONTACT_EMAIL) {
+    const body = `Name: ${data.name}\nEmail: ${data.email}\nRole: ${data.role}\n\n${data.message || ''}`;
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Jurisdicta early access')}&body=${encodeURIComponent(body)}`;
+    say('Opening your email app…', 'ok');
+  } else {
+    say('Early-access sign-up isn’t open just yet. Please check back soon.', 'err');
+  }
+});
+</script>
+</body>
+</html>
